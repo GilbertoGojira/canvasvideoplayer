@@ -15,6 +15,7 @@ namespace CanvasVideoPlayer.DamacServices {
     public const string ONCLICK = "onclick";
     public const string ONMOUSEUP = "onmouseup";
     public const string ONMOUSEDOWN = "onmousedown";
+    public const string ONTOUCHEND = "touchend";
 
 #if UNITY_WEBGL && !UNITY_EDITOR
     static int LastActionID;
