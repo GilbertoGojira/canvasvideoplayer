@@ -69,13 +69,13 @@ namespace CanvasVideoPlayer.DamacServices {
     public event Action OnExit;
     public event Action OnUpdate;
 
-    const string LOADING_STATE = "LOADING";
-    const string PREPARED_STATE = "PREPARED";
-    const string PLAY_STATE = "PLAY";
-    const string PAUSE_STATE = "PAUSE";
-    const string SKIP_STATE = "SKIP";
-    const string ERROR_STATE = "ERROR";
-    const string EXIT_STATE = "EXIT";
+    const string LOADING_STATE = nameof(LOADING_STATE);
+    const string PREPARED_STATE = nameof(PREPARED_STATE);
+    const string PLAY_STATE = nameof(PLAY_STATE);
+    const string PAUSE_STATE = nameof(PAUSE_STATE);
+    const string SKIP_STATE = nameof(SKIP_STATE);
+    const string ERROR_STATE = nameof(ERROR_STATE);
+    const string EXIT_STATE = nameof(EXIT_STATE);
 
     private VideoPlayer m_videoPlayer;
     private SimpleStateMachine m_videoStates = new SimpleStateMachine();
@@ -105,6 +105,7 @@ namespace CanvasVideoPlayer.DamacServices {
         LOADING_STATE,
         () => {
           m_videoPlayer.targetTexture?.Release();
+          m_videoPlayer.Prepare();
           UpdateUI();
         });
 
@@ -228,6 +229,9 @@ namespace CanvasVideoPlayer.DamacServices {
 
     public void Exit() =>
       m_videoStates.SetState(EXIT_STATE);
+
+    public void SetUrl(TMP_InputField input) =>
+      Url = input.text;
   }
 
   #region Input
@@ -285,6 +289,7 @@ namespace CanvasVideoPlayer.DamacServices {
     public void SetState(string state) {
       if (state == CurrentState)
         return;
+      Debug.Log($"Changed from state {CurrentState} to {state}");
       PreviousState = CurrentState;
       CurrentState = state;
       m_states[CurrentState].Invoke();
