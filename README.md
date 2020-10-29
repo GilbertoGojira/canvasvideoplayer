@@ -8,4 +8,4 @@ Play and pause buttons are extended from UI button and use deferred input events
 Clone this repo and run Demo scene
 
 # Preview
-[Here](http://gojira.tv/sample/index.html) you have a WebGL preview.
+[Here](https://canvasvideoplayer.000webhostapp.com) you have a WebGL preview.
